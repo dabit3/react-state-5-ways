@@ -1,11 +1,16 @@
 import React, { useState } from 'react'
-import { createStore, combineReducers } from 'redux'
 import { Provider, useDispatch, useSelector } from 'react-redux'
+import { configureStore, createReducer, combineReducers } from '@reduxjs/toolkit'
 
 function App() {  
   const [input, setInput] = useState('')
+
+  /* useSelector allows you to retrieve the state that you'd like to work with, in our case the notes array */
   const notes = useSelector(state => state.notes)
+
+  /* dispatch allows us to send updates to the store */
   const dispatch = useDispatch()
+
   function onCreateNote() {
     dispatch({ type: 'CREATE_NOTE', note: input })
     setInput('')
@@ -20,20 +25,18 @@ function App() {
   );
 }
 
-function notesReducer(state = [], action) {
-  switch (action.type) {
-    case 'CREATE_NOTE':
-      return [...state, action.note]
-    default:
-      return state
-  }
-}
+/* Here we create a reducer that will update the notes array when the `CREATE_NOTE` action is called */
+const notesReducer = createReducer([], {
+  'CREATE_NOTE': (state, action) => [...state, action.note]
+})
 
+/* Here we create the store using the reducers in the app */
 const reducers = combineReducers({ notes: notesReducer })
-const store = createStore(reducers)
+const store = configureStore({ reducer: reducers })
 
 function Main() {
   return (
+    /* Here we configure the Provider with the store */
     <Provider store={store}>
       <App />
     </Provider>
