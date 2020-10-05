@@ -1,11 +1,13 @@
 import React, { useState } from 'react'
 import { createStore, combineReducers } from 'redux'
-import { Provider, connect } from 'react-redux'
+import { Provider, useDispatch, useSelector } from 'react-redux'
 
-function App({ notes, createNote }) {  
+function App() {  
   const [input, setInput] = useState('')
+  const notes = useSelector(state => state.notes)
+  const dispatch = useDispatch()
   function onCreateNote() {
-    createNote(input)
+    dispatch({ type: 'CREATE_NOTE', note: input })
     setInput('')
   }
   return (
@@ -17,22 +19,6 @@ function App({ notes, createNote }) {
     </div>
   );
 }
-
-const mapStateToProps =  state => ({ notes: state.notes })
-
-const createNoteAction = note => ({
-  type: 'CREATE_NOTE',
-  note
-})
-
-const mapDispatchToProps = {
-  createNote: note => createNoteAction(note)
-}
-
-const AppWithRedux = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(App)
 
 function notesReducer(state = [], action) {
   switch (action.type) {
@@ -49,7 +35,7 @@ const store = createStore(reducers)
 function Main() {
   return (
     <Provider store={store}>
-      <AppWithRedux />
+      <App />
     </Provider>
   )
 }

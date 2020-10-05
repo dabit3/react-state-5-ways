@@ -1,10 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-// import Context from './context';
-// import MobX from './mobx';
-// import Recoil from './recoil';
-// import XState from './xstate';
+// import Context from './context'
+// import MobX from './mobx'
+// import Recoil from './recoil'
+// import XState from './xstate'
 import Redux from './redux'
 import * as serviceWorker from './serviceWorker';
 
