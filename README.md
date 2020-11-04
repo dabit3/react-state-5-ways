@@ -8,6 +8,6 @@
 
 ### 3. [MobX](https://github.com/dabit3/react-state-5-ways/blob/main/src/mobx.js)
 
-### 4. [XState](https://github.com/dabit3/react-state-5-ways/blob/main/src/state.js)
+### 4. [XState](https://github.com/dabit3/react-state-5-ways/blob/main/src/xstate.js)
 
 ### 5. [Redux](https://github.com/dabit3/react-state-5-ways/blob/main/src/redux.js)
